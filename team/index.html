@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EDMon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/neoBootstrap.css" />
+    <!--COMMON-->
+    <link rel="stylesheet" href="css/boxicons.css" />
+    <!--COMMON-->
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="js/jquery.js"></script>
+    <!--COMMON-->
+    <script src="js/neoBootstrap.js"></script>
+    <script src="js/chart.js"></script>
+    <!--COMMON-->
+
+    <!--#region BUSTER CALL  -->
+    <script>
+      var busterCall = ["js/main.js", "css/index.css"];
+      $.post(
+        "ajax/get_version.php",
+        {
+          busterCall: busterCall,
+          titleName: "Team",
+        },
+        function (data) {
+          $("head").html(data);
+        }
+      );
+    </script>
+
+    <!--#endregion -->
+  </head>
+
+  <body>
+    <div class="containerr d-flex">
+      <div class="navigation d-flex flex-column">
+        <div style="padding: 0 16px" class="d-flex justify-content-between">
+          <a href="../" class="d-flex text-decoration-none align-items-center">
+            <img class="logo" src="./images/Edmon logo.png" />
+            <div
+              class="d-flex justify-content-center align-items-center"
+              style="
+                line-height: 60px;
+                padding: 0 10px;
+                color: var(--primary-color) !important;
+                font-size: 26px !important;
+                font-weight: 600;
+              "
+            >
+              EDMon
+            </div>
+          </a>
+          <span class="d-flex justify-content-center align-items-center"
+            ><i
+              class="bx bx-x"
+              style="font-size: 25px !important; cursor: pointer"
+              id="btn-closeNav"
+            ></i
+          ></span>
+        </div>
+        <div
+          class="d-flex flex-column justify-content-between h-100 position-relative py-5"
+        >
+          <div class="position-relative d-grid gap-3 align-content-start">
+            <section class="d-block">
+              <h5 class="position-relative">Analyze</h5>
+              <ul class="list-unstyled d-grid gap-1">
+                <a href="#" class="text-decoration-none">
+                  <li class="d-flex align-items-center">
+                    <i class="bx bx-bar-chart-alt"></i>
+
+                    <span class="m-0 p-0 text-center title">Report</span>
+                  </li>
+                </a>
+              </ul>
+            </section>
+            <section class="d-block">
+              <h5 class="position-relative">Manage</h5>
+              <ul class="list-unstyled d-grid gap-1">
+                <a href="#" class="text-decoration-none">
+                  <li class="d-flex align-items-center active">
+                    <i class="bx bx-group"></i>
+
+                    <span class="m-0 p-0 text-center title"
+                      >Team/Department</span
+                    >
+                  </li>
+                </a>
+                <a href="#" class="text-decoration-none">
+                  <li class="d-flex align-items-center">
+                    <i class="bx bx-window-alt"></i>
+
+                    <span class="m-0 p-0 text-center title">Software</span>
+                  </li>
+                </a>
+                <a href="#" class="text-decoration-none">
+                  <li class="d-flex align-items-center">
+                    <i class="bx bx-purchase-tag-alt"></i>
+
+                    <span class="m-0 p-0 text-center title"
+                      >Tags/Categories</span
+                    >
+                  </li>
+                </a>
+              </ul>
+            </section>
+          </div>
+
+          <div class="position-relative">
+            <div
+              class="position-sticky d-flex flex-column justify-content-end bottom-0 gap-3 align-content-start mt-5"
+            >
+              <section class="d-block">
+                <h5 class="position-relative">Admin</h5>
+                <ul class="list-unstyled d-grid gap-1 m-0">
+                  <a href="#" class="text-decoration-none">
+                    <li class="d-flex align-items-center">
+                      <i class="bx bx-buildings"></i>
+
+                      <span class="m-0 p-0 text-center title"
+                        >Organization</span
+                      >
+                    </li>
+                  </a>
+                  <a href="#" class="text-decoration-none">
+                    <li class="d-flex align-items-center">
+                      <i class="bx bx-cog"></i>
+
+                      <span class="m-0 p-0 text-center title">Settings</span>
+                    </li>
+                  </a>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main d-flex flex-column">
+        <div class="topbar d-flex align-items-center shadow-sm px-3">
+          <div class="toggle">
+            <i class="bx bx-menu fs-1"></i>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-end gap-3">
+            <i class="bx bx-bell fs-3 notif"></i>
+
+            <div class="user"></div>
+          </div>
+        </div>
+        <div class="content h-100">
+          <div
+            class="top d-flex justify-content-between px-3 py-2 position-relative"
+            style="z-index: 6"
+          >
+            <div class="d-flex">
+              <ul class="list-unstyled list-inline d-flex gap-4 m-0 py-2">
+                <li class="page-tab pe-none fw-medium fs-5 list-inline-item">
+                  Organization
+                </li>
+                <a
+                  href="#"
+                  class="text-decoration-none d-flex align-items-center"
+                >
+                  <li class="page-tab active list-inline-item">Summary</li>
+                </a>
+                <a
+                  href="#"
+                  class="text-decoration-none d-flex align-items-center"
+                >
+                  <li class="page-tab list-inline-item">Detailed</li>
+                </a>
+                <a
+                  href="#"
+                  class="text-decoration-none d-flex align-items-center"
+                >
+                  <li class="page-tab list-inline-item">Weekly</li>
+                </a>
+              </ul>
+            </div>
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button
+                class="btn d-flex justify-content-center align-items-center gap-1"
+                title="Print report"
+              >
+                <i class="bx bx-save fs-5"></i>
+                <span>Save</span>
+              </button>
+              <button
+                class="btn d-flex justify-content-center align-items-center gap-1"
+                title="Export report"
+              >
+                <i class="bx bx-export fs-5"></i>
+                <span>Export</span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="filters position-relative px-3 py-2 d-flex gap-3 shadow-sm"
+            style="z-index: 5"
+          >
+            <span
+              class="text-uppercase d-flex align-items-center"
+              style="font-size: 12px !important"
+              >filters:</span
+            >
+            <div class="d-flex gap-2">
+              <div class="filter-item position-relative">
+                <button
+                  class="btn d-flex align-items-center gap-1 justify-content-center filter"
+                >
+                  <i class="bx bx-group fs-4"></i>
+                  <span>Team</span>
+                </button>
+                <div
+                  class="team-tab additional position-absolute visually-hidden"
+                >
+                  <div class="position-fixed d-block top-0 start-0 bg"></div>
+                  <div class="popup position-absolute shadow">
+                    <div class="d-flex flex-column position-relative">
+                      <div class="search position-relative">
+                        <div style="width: 310px">
+                          <input
+                            type="text"
+                            class="form-control ps-4"
+                            id="teamSearch"
+                            placeholder="Search members or groups..."
+                          />
+                          <i class="bx bx-search position-absolute mx-2"></i>
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex flex-column grp"
+                        style="padding: 0 15px"
+                      >
+                        <div class="header d-flex justify-content-between">
+                          <span
+                            class="text-uppercase"
+                            style="font-size: 12px !important"
+                            >Group</span
+                          >
+                          <div class="d-flex gap-3">
+                            <span
+                              role="button"
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              id="teamGrpSelAll"
+                            >
+                              All
+                            </span>
+                            <span
+                              role="button"
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              id="teamGrpRemoveAll"
+                            >
+                              None
+                            </span>
+                          </div>
+                        </div>
+                        <div class="py-2 group-check">
+                          <div
+                            class="form-check position-relative py-1"
+                            role="button"
+                          >
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="grp1"
+                            />
+                            <label class="form-check-label" for="grp1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div
+                            class="form-check position-relative py-1"
+                            role="button"
+                          >
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="grp2"
+                            />
+                            <label class="form-check-label" for="grp2">
+                              Checked checkbox
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex flex-column mem"
+                        style="padding: 0 15px"
+                      >
+                        <div class="header d-flex justify-content-between">
+                          <span
+                            class="text-uppercase"
+                            style="font-size: 12px !important"
+                            >Member</span
+                          >
+                          <div class="d-flex gap-3">
+                            <span
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              role="button"
+                              id="teamMemSelAll"
+                            >
+                              All
+                            </span>
+                            <span
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              role="button"
+                              id="teamMemRemoveAll"
+                            >
+                              None
+                            </span>
+                          </div>
+                        </div>
+                        <div class="py-2 mem-check">
+                          <div class="form-check position-relative py-1">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="mem1"
+                            />
+                            <label class="form-check-label" for="mem1">
+                              Member1
+                            </label>
+                          </div>
+                          <div class="form-check position-relative py-1">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="mem2"
+                            />
+                            <label class="form-check-label" for="mem2">
+                              Member2
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-item position-relative">
+                <button
+                  class="btn d-flex align-items-center gap-1 justify-content-center filter"
+                >
+                  <i class="bx bx-window-alt fs-4"></i>
+                  <span>Software</span>
+                </button>
+                <div
+                  class="team-tab additional position-absolute visually-hidden"
+                >
+                  <div class="position-fixed d-block top-0 start-0 bg"></div>
+                  <div class="popup position-absolute shadow">
+                    <div class="d-flex flex-column position-relative">
+                      <div class="search position-relative">
+                        <div style="width: 310px">
+                          <input
+                            type="text"
+                            class="form-control ps-4"
+                            id="softSearch"
+                            placeholder="Search softwares..."
+                          />
+                          <i class="bx bx-search position-absolute mx-2"></i>
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex flex-column grp"
+                        style="padding: 0 15px"
+                      >
+                        <div class="header d-flex justify-content-between">
+                          <span
+                            class="text-uppercase"
+                            style="font-size: 12px !important"
+                            >Software</span
+                          >
+                          <div class="d-flex gap-3">
+                            <span
+                              role="button"
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              id="softGrpSelAll"
+                            >
+                              All
+                            </span>
+                            <span
+                              role="button"
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              id="softGrpRemoveAll"
+                            >
+                              None
+                            </span>
+                          </div>
+                        </div>
+                        <div class="py-2 group-check">
+                          <div
+                            class="form-check position-relative py-1"
+                            role="button"
+                          >
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="grp1"
+                            />
+                            <label class="form-check-label" for="grp1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div
+                            class="form-check position-relative py-1"
+                            role="button"
+                          >
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="grp2"
+                            />
+                            <label class="form-check-label" for="grp2">
+                              Checked checkbox
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-item position-relative">
+                <button
+                  class="btn d-flex align-items-center gap-1 justify-content-center filter"
+                >
+                  <i class="bx bx-purchase-tag-alt fs-4"></i>
+                  <span>Tags</span>
+                </button>
+                <div
+                  class="team-tab additional position-absolute visually-hidden"
+                >
+                  <div class="position-fixed d-block top-0 start-0 bg"></div>
+                  <div class="popup position-absolute shadow">
+                    <div class="d-flex flex-column position-relative">
+                      <div class="search position-relative">
+                        <div style="width: 310px">
+                          <input
+                            type="text"
+                            class="form-control ps-4"
+                            id="tagSearch"
+                            placeholder="Search tag..."
+                          />
+                          <i class="bx bx-search position-absolute mx-2"></i>
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex flex-column grp"
+                        style="padding: 0 15px"
+                      >
+                        <div class="header d-flex justify-content-between">
+                          <span
+                            class="text-uppercase"
+                            style="font-size: 12px !important"
+                            >tag</span
+                          >
+                          <div class="d-flex gap-3">
+                            <span
+                              role="button"
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              id="tagGrpSelAll"
+                            >
+                              All
+                            </span>
+                            <span
+                              role="button"
+                              class="text-uppercase"
+                              style="
+                                font-size: 12px !important;
+                                color: var(--primary-color) !important;
+                              "
+                              id="tagGrpRemoveAll"
+                            >
+                              None
+                            </span>
+                          </div>
+                        </div>
+                        <div class="py-2 group-check">
+                          <div
+                            class="form-check position-relative py-1"
+                            role="button"
+                          >
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="grp1"
+                            />
+                            <label class="form-check-label" for="grp1">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div
+                            class="form-check position-relative py-1"
+                            role="button"
+                          >
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="grp2"
+                            />
+                            <label class="form-check-label" for="grp2">
+                              Checked checkbox
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <span
+                class="align-items-center justify-content-center btn-removeFilter"
+                role="button"
+                ><i
+                  class="bx bx-x fs-3 px-2"
+                  style="color: #8d8d8d !important"
+                ></i
+              ></span>
+            </div>
+          </div>
+          <div class="data w-100 p-4 d-flex flex-column">
+            <div class="graph d-flex flex-column flex-lg-row">
+              <div class="col-12 col-lg-8" style="height: 400px">
+                <canvas id="myChart"></canvas>
+              </div>
+              <div
+                class="col-12 col-lg-4 d-flex justify-content-center"
+                style="height: 400px"
+              >
+                <canvas id="myChart2"></canvas>
+              </div>
+            </div>
+
+            <div
+              class="table-cont d-flex flex-column mt-4 p-3 rounded shadow-sm"
+            >
+              <div class="header d-flex justify-content-between">
+                <div class="left">
+                  <div>
+                    <select name="group by" id="" class="form-select">
+                      <option value="">Group by User</option>
+                      <option value="">Group by Project</option>
+                      <option value="">Group by Client</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="right"></div>
+              </div>
+              <div class="table-responsive mt-4 py-0">
+                <table class="table mb-0 table-hover">
+                  <thead class="sticky-top">
+                    <tr>
+                      <th>id</th>
+                      <th style="width: 50%">Name</th>
+                      <th>Software name</th>
+                      <th>Screen time</th>
+                      <th>Path</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Sample Name</td>
+                      <td>VS Code</td>
+                      <td>8:00:00</td>
+                      <td>C:\Users\medrano_c-kdt\.vscode</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Cardio Dasilay</td>
+                      <td>VS Code</td>
+                      <td>8:00:00</td>
+                      <td>C:\Users\medrano_c-kdt\.vscode</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
