@@ -246,6 +246,12 @@ body {
 .main .data .table-cont table tbody tr td:nth-of-type(2) {
   width: 50%;
 }
+.main .data .table-cont table tbody tr td:last-of-type {
+  text-align: end;
+}
+.main .data .table-cont table tbody tr td {
+  vertical-align: middle;
+}
 .main .data .table-cont table tbody tr:hover td {
   background-color: rgba(114, 134, 211, 0.25) !important;
 }
